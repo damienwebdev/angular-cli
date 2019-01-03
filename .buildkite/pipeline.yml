@@ -1,5 +1,6 @@
 steps:
   - label: windows-test
+    branches: master
     commands:
       # Yarn workspaces creates directory junctions inside node_modules, but these fail in docker.
       # E.g. inside the container, `mklink /J "C:\src\_" "C:\src\packages\_"` will fail with 
@@ -11,7 +12,7 @@ steps:
       # Actual CI commands
       # --network-timeout is a workaround for https://github.com/yarnpkg/yarn/issues/6221
       - yarn install --frozen-lockfile --non-interactive --network-timeout 500000
-      - yarn webdriver-update-appveyor
+      - yarn webdriver-update
       - node --version
       - yarn --version
       - yarn test
